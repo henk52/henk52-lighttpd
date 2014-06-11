@@ -1,0 +1,19 @@
+lighttpd
+
+This is the lighttpd module.
+
+It installs lighttpd: http://www.lighttpd.net/
+
+License
+-------
+Apache 2.0
+
+Contact
+-------
+https://github.com/henk52/henk52-lighttpd
+
+
+Support
+-------
+
+Please log tickets and issues at https://github.com/henk52/henk52-lighttpd/issues
