@@ -36,11 +36,11 @@
 # Copyright 2014 Your name here, unless otherwise noted.
 #
 class lighttpd (
-  $szWebProcessOwnerName = params_lookup( 'WebProcessOwner' )
+  $szWebProcessOwnerName = hiera( 'WebProcessOwner', 'lighttpd' ),
+  $szWebRootDirectory = hiera( 'WebRootDirectory', '/var/www' )
 ) inherits lighttpd::params  {
 
 
-#  see: http://news.softpedia.com/news/Installing-Lighttpd-on-Fedora-and-Ubuntu-44557.shtml
 
 package { 'lighttpd':
   ensure => present,
@@ -49,7 +49,7 @@ package { 'lighttpd':
 
 file { '/etc/lighttpd/lighttpd.conf':
   ensure  => present,
-  content => template('lighttpd_conf.erb'),
+  content => template('/etc/puppet/modules/lighttpd/templates/lighttpd_conf.erb'),
   require => Package [ 'lighttpd' ],
   notify  => Service [ 'lighttpd' ]
 }

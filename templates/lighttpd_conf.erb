@@ -15,7 +15,7 @@
 ## chroot example aswell.
 ##
 var.log_root    = "/var/log/lighttpd"
-var.server_root = "<%= @szKickStartBaseDirectory %>"
+var.server_root = "<%= @szWebRootDirectory %>"
 var.state_dir   = "/var/run"
 var.home_dir    = "/var/lib/lighttpd"
 var.conf_dir    = "/etc/lighttpd"
@@ -446,7 +446,5 @@ server.upload-dirs = ( "/var/tmp" )
 ##
 #######################################################################
 server.modules += ( "mod_alias" )
-alias.url = ( "/images/" => "<%= @szKickStartImageDir %>/" )
-alias.url += ( "/configs/" => "<%= @szKickStartConfsDir %>/" )
-alias.url += ( "/extrarepos/" => "<%= @szKickStartRepoExtrasDir %>/" )
-alias.url += ( "/puppetextras/" => "<%= @szKickStartPuppetExtrasDir %>/" )
+alias.url = ( "/null/" => "/dev/null" )
+TODO Loop a possible array here.

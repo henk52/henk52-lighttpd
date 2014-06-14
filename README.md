@@ -1,6 +1,8 @@
 henk52-lighttpd
 ===============
 
+* see: http://news.softpedia.com/news/Installing-Lighttpd-on-Fedora-and-Ubuntu-44557.shtml
+
 Puppet module for Lighttpd, a light system requirements.
 
 
@@ -14,3 +16,6 @@ Installation:
 
 
 Usage:
+
+Defalt installation of Lighttpd:
+  sudo puppet apply --verbose /etc/puppet/modules/lighttpd/manifests/install.pp
