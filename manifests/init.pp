@@ -35,7 +35,29 @@
 #
 # Copyright 2014 Your name here, unless otherwise noted.
 #
-class lighttpd {
+class lighttpd (
+  $szWebProcessOwnerName = params_lookup( 'WebProcessOwner' )
+) inherits lighttpd::params  {
 
+
+#  see: http://news.softpedia.com/news/Installing-Lighttpd-on-Fedora-and-Ubuntu-44557.shtml
+
+package { 'lighttpd':
+  ensure => present,
+}
+
+
+file { '/etc/lighttpd/lighttpd.conf':
+  ensure  => present,
+  content => template('lighttpd_conf.erb'),
+  require => Package [ 'lighttpd' ],
+  notify  => Service [ 'lighttpd' ]
+}
+
+
+service { 'lighttpd':
+  ensure => running,
+  enable => true,
+}
 
 }
