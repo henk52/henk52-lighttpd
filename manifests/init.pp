@@ -37,9 +37,9 @@
 #
 class lighttpd (
   $szWebProcessOwnerName = hiera( 'WebProcessOwner', 'lighttpd' ),
-  $szWebRootDirectory = hiera( 'WebRootDirectory', '/var/www' )
+  $szWebRootDirectory = hiera( 'WebRootDirectory', '/var/www' ),
+  $harAliasMappings
 ) inherits lighttpd::params  {
-
 
 
 package { 'lighttpd':
