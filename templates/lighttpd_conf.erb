@@ -6,9 +6,6 @@
 ##
 #######################################################################
 
-<% @harAliasMappings.each_pair do |szAlias, szDirectory| -%>
-   * <%= szAlias %>: <%= szDirectory %>
-<% end %>
 
 #######################################################################
 ##
@@ -451,5 +448,12 @@ server.upload-dirs = ( "/var/tmp" )
 server.modules += ( "mod_alias" )
 Syntax error:
 
-alias.url = ( "/null/" => "/dev/null" )
 ##TODO Loop a possible array here.
+<% if ( @harAliasMappings.length() > 0 ) then -%>
+  <% arFirstAliasPair = @harAliasMappings.shift() -%>
+alias.url = ( "<%= arFirstAliasPair[0] %>" => "<%= arFirstAliasPair[1] %>" )
+  <% @harAliasMappings.each_pair do |szAlias, szDirectory| -%>
+alias.url += ( "<%= szAlias %>" => "<%= szDirectory %>" )
+  <% end %>
+<% end -%>
+
