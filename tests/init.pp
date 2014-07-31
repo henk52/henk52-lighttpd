@@ -9,4 +9,11 @@
 # Learn more about module testing here:
 # http://docs.puppetlabs.com/guides/tests_smoke.html
 #
-include lighttpd
+$arAliases = {
+  'test' => '/var/test',
+}  
+
+class { "lighttpd":
+  harAliasMappings => $arAliases,
+}
+
