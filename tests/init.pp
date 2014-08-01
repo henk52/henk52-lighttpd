@@ -9,11 +9,33 @@
 # Learn more about module testing here:
 # http://docs.puppetlabs.com/guides/tests_smoke.html
 #
+
+$szTestDirectory = '/var/test'
+
 $arAliases = {
-  'test' => '/var/test',
+  '/test' => "$szTestDirectory",
 }  
 
+$szWebProcessOwner = 'lighttpd'
+
+file { "$szTestDirectory":
+  ensure => directory,
+  owner  => "$szWebProcessOwner",
+}
+
+file { "$szTestDirectory/index.html":
+  ensure  => file,
+  owner   => "$szWebProcessOwner",
+  content => "<html><title>Testing puppet install of lighttpd</title><body>Did the installatio succeed?</body></html>",
+}
 class { "lighttpd":
+  szWebProcessOwnerName => $szWebProcessOwner,
   harAliasMappings => $arAliases,
 }
 
+augeas { 'selinux_config':
+  context => '/files/etc/selinux/config',
+  changes => [
+    'set SELINUX permissive',
+  ],
+}
