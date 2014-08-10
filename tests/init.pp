@@ -33,6 +33,12 @@ class { "lighttpd":
   harAliasMappings => $arAliases,
 }
 
+# define a service
+firewalld::service { 'web':
+        description     => 'Web service',
+        ports           => [{port => '80', protocol => 'tcp',},],
+}
+
 augeas { 'selinux_config':
   context => '/files/etc/selinux/config',
   changes => [
