@@ -25,9 +25,13 @@ Puppet module for Lighttpd, a light system requirements.
 ## Have a in '/storage'
 
 ```
+$szWebProcessOwnerName = 'lighttpd'
+
 $szWebStorageDir = '/var/webstorage'
 file { "$szWebStorageDir":
   ensure => directory,
+  owner  => "$szWebProcessOwnerName",
+  
 }
 
 $arAliases = [
@@ -38,7 +42,8 @@ $arAliases = [
 ]
 
 class { 'lighttpd':
-  harAliasMappings => "$arAliases",
+  szWebProcessOwnerName => "$szWebProcessOwnerName",
+  harAliasMappings      => "$arAliases",
 }
 ```
 
