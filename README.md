@@ -15,7 +15,7 @@ Puppet module for Lighttpd, a light system requirements.
 * git clone https://github.com/henk52/henk52-lighttpd.git lighttpd
 
 
-= Usage:
+# Usage:
 
 Defalt installation of Lighttpd:
 1. sudo puppet apply --verbose /etc/puppet/modules/lighttpd/manifests/install.pp
