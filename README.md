@@ -18,4 +18,5 @@ Puppet module for Lighttpd, a light system requirements.
 # Usage:
 
 Defalt installation of Lighttpd:
+
 1. sudo puppet apply --verbose /etc/puppet/modules/lighttpd/manifests/install.pp
