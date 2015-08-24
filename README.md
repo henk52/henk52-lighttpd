@@ -17,6 +17,28 @@ Puppet module for Lighttpd, a light system requirements.
 
 # Usage:
 
-Defalt installation of Lighttpd:
+## Defalt installation of Lighttpd
 
 1. sudo puppet apply --verbose /etc/puppet/modules/lighttpd/manifests/install.pp
+
+
+## Have a in '/storage'
+
+´´´
+$szWebStorageDir = '/var/webstorage'
+file { "$szWebStorageDir":
+  ensure => directory,
+}
+
+$arAliases = [
+  { 
+    alias => '/storage',
+    path  => "$szWebStorageDir",
+  },
+]
+
+class { 'lighttpd':
+  harAliasMappings => "$arAliases",
+}
+´´´
+
