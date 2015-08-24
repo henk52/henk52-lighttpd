@@ -6,16 +6,16 @@ henk52-lighttpd
 Puppet module for Lighttpd, a light system requirements.
 
 
-LIMITATIONS:
-- Right now it has only been tested on Fedora (20).
+== LIMITATIONS:
+* Right now it has only been tested on Fedora (20).
 
 
-Installation:
-# cd /etc/puppet/modules
-# git clone https://github.com/henk52/henk52-lighttpd.git lighttpd
+= Installation:
+* cd /etc/puppet/modules
+* git clone https://github.com/henk52/henk52-lighttpd.git lighttpd
 
 
-Usage:
+= Usage:
 
 Defalt installation of Lighttpd:
-  sudo puppet apply --verbose /etc/puppet/modules/lighttpd/manifests/install.pp
+1. sudo puppet apply --verbose /etc/puppet/modules/lighttpd/manifests/install.pp
