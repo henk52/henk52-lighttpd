@@ -24,7 +24,7 @@ Puppet module for Lighttpd, a light system requirements.
 
 ## Have a in '/storage'
 
-´´´
+```
 $szWebStorageDir = '/var/webstorage'
 file { "$szWebStorageDir":
   ensure => directory,
@@ -40,5 +40,5 @@ $arAliases = [
 class { 'lighttpd':
   harAliasMappings => "$arAliases",
 }
-´´´
+```
 
