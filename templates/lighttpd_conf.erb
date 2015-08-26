@@ -135,7 +135,7 @@ server.upload-dirs = ( "/var/tmp" )
 
 <% if ( @harAliasMappings.length() > 0 ) then -%>
   <% szAdditional = "" %>
-  <% arFirstAliasPair = @harAliasMappings.each do |szAlias_key| -%>
+  <% @harAliasMappings.each do |szAlias_key| -%>
 alias.url <%= szAdditional %>= ( "<%= szAlias_key["alias"] %>" => "<%= szAlias_key["path"] %>" )
   <% szAdditional = "+" %>
   <% end -%>
