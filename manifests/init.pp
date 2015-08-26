@@ -45,6 +45,13 @@ package { 'lighttpd':
   ensure => present,
 }
 
+exec { 'enable_dir_listing':
+  creates => '/etc/lighttpd/conf-enabled/10-dir-listing.conf',
+  path    => [ '/usr/bin', '/bin/ ],
+  command => 'mv /etc/lighttpd/conf-available/10-dir-listing.conf /etc/lighttpd/conf-enabled
+  require => Package['lighttpd'],
+  notify  => Service [ 'lighttpd' ],
+}
 
 file { '/etc/lighttpd/lighttpd.conf':
   ensure  => present,
@@ -55,8 +62,9 @@ file { '/etc/lighttpd/lighttpd.conf':
 
 
 service { 'lighttpd':
-  ensure => running,
-  enable => true,
+  ensure  => running,
+  enable  => true,
+  require => Exec['enable_dir_listing'],
 }
 
 }
