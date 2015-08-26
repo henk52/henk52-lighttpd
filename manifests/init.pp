@@ -45,6 +45,18 @@ package { 'lighttpd':
   ensure => present,
 }
 
+file { '/var/log/lighttpd':
+  ensure => directory,
+  owner => "$szWebProcessOwnerName",
+  group => 'lighttpd',
+}
+
+file { '/var/log/lighttpd/error.log':
+  owner   => "$szWebProcessOwnerName",
+  group   => 'lighttpd',
+  require => File['/var/log/lighttpd'],
+}
+
 exec { 'enable_dir_listing':
   creates => '/etc/lighttpd/conf-enabled/10-dir-listing.conf',
   path    => [ '/usr/bin', '/bin' ],
@@ -64,7 +76,10 @@ file { '/etc/lighttpd/lighttpd.conf':
 service { 'lighttpd':
   ensure  => running,
   enable  => true,
-  require => Exec['enable_dir_listing'],
+  require => [
+               Exec['enable_dir_listing'],
+               File['/var/log/lighttpd','/var/log/lighttpd/error.log'],
+             ],
 }
 
 }
