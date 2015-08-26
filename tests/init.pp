@@ -18,30 +18,32 @@ $arAliases = {
 
 $szWebProcessOwner = 'lighttpd'
 
+group { 'lighttpd':
+  ensure => present,
+}
+
+user { "$szWebProcessOwner":
+  ensure  => present,
+  gid     => 'lighttpd',
+  require => Group['lighttpd'];
+}
+
 file { "$szTestDirectory":
   ensure => directory,
   owner  => "$szWebProcessOwner",
+  require => User["$szWebProcessOwner"],
 }
 
 file { "$szTestDirectory/index.html":
   ensure  => file,
   owner   => "$szWebProcessOwner",
   content => "<html><title>Testing puppet install of lighttpd</title><body>Did the installatio succeed?</body></html>",
+  require => User["$szWebProcessOwner"],
 }
+
 class { "lighttpd":
   szWebProcessOwnerName => $szWebProcessOwner,
   harAliasMappings => $arAliases,
+  require => User["$szWebProcessOwner"],
 }
 
-# define a service
-firewalld::service { 'web':
-        description     => 'Web service',
-        ports           => [{port => '80', protocol => 'tcp',},],
-}
-
-augeas { 'selinux_config':
-  context => '/files/etc/selinux/config',
-  changes => [
-    'set SELINUX permissive',
-  ],
-}
