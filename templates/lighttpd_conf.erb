@@ -107,26 +107,12 @@ server.bind = "<%= @szIpAddressForSupportingKickStart %>"
 ##
 server.stat-cache-engine = "simple"
  
-##
-## Fine tuning for the request handling
-##
-## max-connections == max-fds/2 (maybe /3)
-## means the other file handles are used for fastcgi/files
-##
-server.max-connections = 1024
-
-
 
 ##
 ## Should lighttpd follow symlinks?
 ##
 server.follow-symlink = "enable"
  
-
-##
-## defaults to /var/tmp as we assume it is a local harddisk
-##
-server.upload-dirs = ( "/var/tmp" )
  
 ##
 #######################################################################
@@ -135,7 +121,7 @@ server.upload-dirs = ( "/var/tmp" )
 <% if ( @harAliasMappings.length() > 0 ) then -%>
   <% szAdditional = "" %>
   <% @harAliasMappings.each do |szAlias_key| -%>
-alias.url <%= szAdditional %>= ( "<%= szAlias_key["alias"] %>" => "<%= szAlias_key["path"] %>" )
+alias.url <%= szAdditional %>= ( "<%= szAlias_key[0] %>" => "<%= szAlias_key[1] %>" )
   <% szAdditional = "+" %>
   <% end -%>
 <% end -%>
